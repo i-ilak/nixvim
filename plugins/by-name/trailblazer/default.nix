@@ -1,6 +1,7 @@
 { lib, ... }:
 let
   inherit (lib.nixvim) defaultNullOpts;
+  inherit (lib) types;
 in
 lib.nixvim.plugins.mkNeovimPlugin {
   name = "trailblazer";
@@ -19,7 +20,7 @@ lib.nixvim.plugins.mkNeovimPlugin {
 
     trail_options = {
       trail_mark_priority = defaultNullOpts.mkUnsignedInt 10001 "Priority of trail marks.";
-      available_trail_mark_modes = defaultNullOpts.mkList [
+      available_trail_mark_modes = defaultNullOpts.mkListOf types.str [
         "global_chron"
         "global_buf_line_sorted"
         "global_fpath_line_sorted"
@@ -44,8 +45,10 @@ lib.nixvim.plugins.mkNeovimPlugin {
       trail_mark_in_text_highlights_enabled = defaultNullOpts.mkBool true "Enable in-text highlights.";
       trail_mark_symbol_line_indicators_enabled = defaultNullOpts.mkBool false "Enable symbol indicators.";
       symbol_line_enabled = defaultNullOpts.mkBool true "Enable symbol line.";
-      default_trail_mark_stacks = defaultNullOpts.mkList [ "default" ] "Default trail mark stacks.";
-      available_trail_mark_stack_sort_modes = defaultNullOpts.mkList [
+      default_trail_mark_stacks = defaultNullOpts.mkListOf types.str [
+        "default"
+      ] "Default trail mark stacks.";
+      available_trail_mark_stack_sort_modes = defaultNullOpts.mkListOf types.str [
         "alpha_asc"
         "alpha_dsc"
         "chron_asc"
